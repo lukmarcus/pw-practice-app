@@ -1,33 +1,17 @@
 import { test } from '@playwright/test';
 
-test.beforeEach(async ({page}) => {
+test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:4200/');
+  await page.getByText("Forms").click()
+  await page.getByText("Form Layouts").click()
 })
 
-test.describe('suite', async () => {
-  test.beforeEach(async ({page}) => {
-    await page.getByText("Forms").click()
-  })
-  
-  test('the first test', async ({ page }) => {
-    await page.getByText("Form Layouts").click()
-  });
-  
-  test('navigate to datepicker page', async ({ page }) => {
-    await page.getByText("Datepicker").click()
-  });
-})
-
-test.describe('suite1', async () => {
-  test.beforeEach(async ({page}) => {
-    await page.getByText("Charts").click()
-  })
-  
-  test('the first test1', async ({ page }) => {
-    await page.getByText("Form Layouts").click()
-  });
-  
-  test('navigate to datepicker page1', async ({ page }) => {
-    await page.getByText("Datepicker").click()
-  });
-})
+test('User facing locators', async ({ page }) => {
+  await page.getByRole('textbox', {name: "Email"}).first().click()
+  await page.getByRole('button', {name: "Sign in"}).first().click()
+  await page.getByLabel('Email').first().click()
+  await page.getByPlaceholder('Jane Doe').click()
+  await page.getByText('Using the Grid').click()
+  await page.getByTestId('Using the Grid').click()
+  await page.getByTitle('IoT Dashboard').click()
+});
