@@ -1,5 +1,2 @@
-### Ngx-Admin Angular 14 application from akveo.com
-
-This is modified and more lightweight version of original application to practice UI Automation with Playwright.
-
-The original repo is here: https://github.com/akveo/ngx-admin
+- This repository is a fork from https://github.com/bondar-artem/pw-practice-app
+- Tests created with Course [Playwright: Web Automation Testing From Zero to Hero](https://symfonia.udemy.com/course/playwright-from-zero-to-hero/)
