@@ -197,9 +197,31 @@ test("Datepicker", async ({ page }) => {
   const calendarInputField = page.getByPlaceholder("Form Picker");
   await calendarInputField.click();
 
+  let date = new Date();
+  date.setDate(date.getDate() + 7);
+  const expectedDate = date.getDate().toString();
+  const expectedMonthShort = date.toLocaleString("En-US", { month: "short" });
+  const expectedMonthLong = date.toLocaleString("En-US", { month: "long" });
+  const expectedYear = date.getFullYear();
+  const dateToAssert = `${expectedMonthShort} ${expectedDate}, ${expectedYear}`;
+
+  let calendarmonthAndYear = await page
+    .locator("nb-calendar-view-model")
+    .textContent();
+  const expectedMonthAndYear = ` ${expectedMonthLong} ${expectedYear}`;
+
+  while (!calendarmonthAndYear.includes(expectedMonthAndYear)) {
+    await page
+      .locator('nb-calendar-pageable-navigation [data-name="chevron-right"]')
+      .click();
+    calendarmonthAndYear = await page
+      .locator("nb-calendar-view-model")
+      .textContent();
+  }
+
   await page
     .locator("[class='day-cell ng-star-inserted]")
-    .getByText("14", { exact: true })
+    .getByText(expectedDate, { exact: true })
     .click();
-  await expect(calendarInputField).toHaveValue("Jun 1, 2023");
+  await expect(calendarInputField).toHaveValue(dateToAssert);
 });
