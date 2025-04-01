@@ -3,5 +3,6 @@
 
 # How to use
 - Install: `npm install --force`
+- Download Playwright browsers `npx playwright install`
 - Run: `npm start`
 - Open: http://localhost:4200/
