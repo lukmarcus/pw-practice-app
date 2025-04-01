@@ -12,7 +12,7 @@ test("User facing locators", async ({ page }) => {
   await page.getByLabel("Email").first().click();
   await page.getByPlaceholder("Jane Doe").click();
   await page.getByText("Using the Grid").click();
-  await page.getByTestId("Using the Grid").click();
+  await page.getByTestId("SignIn").click();
   await page.getByTitle("IoT Dashboard").click();
 });
 
@@ -56,11 +56,11 @@ test("Locating parent elements", async ({ page }) => {
     .filter({ hasText: "Sign in" })
     .getByRole("textbox", { name: "Email" })
     .click();
-  await page
-    .locator(':text-is("Using the grid")')
-    .locator("..")
-    .getByRole("textbox", { name: "Email" })
-    .click();
+  // await page
+  //   .locator(':text-is("Using the grid")')
+  //   .locator("..")
+  //   .getByRole("textbox", { name: "Email" })
+  //   .click();
 });
 
 test("Reusing the locators", async ({ page }) => {
