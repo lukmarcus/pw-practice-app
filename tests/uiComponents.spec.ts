@@ -101,7 +101,7 @@ test("Lists & dropdowns", async ({ page }) => {
   await optionList.filter({ hasText: "Cosmic" }).click();
 
   const header = page.locator("nb-layout-header");
-  await expect(header).toHaveCSS("background-color", "rgb(50, 50, 89");
+  await expect(header).toHaveCSS("background-color", "rgb(50, 50, 89)");
 
   const colors = {
     Light: "rgb(255, 255, 255)",
@@ -135,7 +135,7 @@ test("Dialog box", async ({ page }) => {
   await page.getByText("Smart Table").click();
 
   page.on("dialog", (dialog) => {
-    expect(dialog.message).toEqual("Are you sure you want to delete?");
+    expect(dialog.message()).toEqual("Are you sure you want to delete?");
     dialog.accept();
   });
 
@@ -170,7 +170,7 @@ test("Web tables", async ({ page }) => {
     .getByPlaceholder("E-mail")
     .fill("test@test.com");
   await page.locator(".nb-checkmark").click();
-  await expect(targetRowById.locator("td").nth(6)).toHaveText("test@test.com");
+  await expect(targetRowById.locator("td").nth(5)).toHaveText("test@test.com");
 
   const ages = ["20", "30", "40", "200"];
 
@@ -209,22 +209,22 @@ test("Datepicker", async ({ page }) => {
   const expectedYear = date.getFullYear();
   const dateToAssert = `${expectedMonthShort} ${expectedDate}, ${expectedYear}`;
 
-  let calendarmonthAndYear = await page
-    .locator("nb-calendar-view-model")
+  let calendarMonthAndYear = await page
+    .locator("nb-calendar-view-mode")
     .textContent();
   const expectedMonthAndYear = ` ${expectedMonthLong} ${expectedYear}`;
 
-  while (!calendarmonthAndYear.includes(expectedMonthAndYear)) {
+  while (!calendarMonthAndYear.includes(expectedMonthAndYear)) {
     await page
       .locator('nb-calendar-pageable-navigation [data-name="chevron-right"]')
       .click();
-    calendarmonthAndYear = await page
+    calendarMonthAndYear = await page
       .locator("nb-calendar-view-model")
       .textContent();
   }
 
   await page
-    .locator("[class='day-cell ng-star-inserted]")
+    .locator("[class='day-cell ng-star-inserted']")
     .getByText(expectedDate, { exact: true })
     .click();
   await expect(calendarInputField).toHaveValue(dateToAssert);
