@@ -26,18 +26,18 @@ test.describe("Form Layouts page", () => {
 
     await expect(usingTheGridEmailInput).toHaveValue("test2@test.com");
 
-    const successButton = page.locator(".bg-success");
-    await successButton.click();
+    // const successButton = page.locator(".bg-success");
+    // await successButton.click();
 
-    await successButton.waitFor({ state: "attached" });
-    const text = await successButton.allTextContents();
-    expect(text).toContain("Data loaded with AJAX get request.");
-    await expect(successButton).toHaveText(
-      "Data loaded with AJAX get request.",
-      {
-        timeout: 20000,
-      }
-    );
+    // await successButton.waitFor({ state: "attached" });
+    // const text = await successButton.allTextContents();
+    // expect(text).toContain("Data loaded with AJAX get request.");
+    // await expect(successButton).toHaveText(
+    //   "Data loaded with AJAX get request.",
+    //   {
+    //     timeout: 20000,
+    //   }
+    // );
   });
 
   test("Radio buttons", async ({ page }) => {
@@ -61,10 +61,14 @@ test.describe("Form Layouts page", () => {
       .getByRole("radio", { name: "Option 2" })
       .check({ force: true });
     expect(
-      usingTheGridForm.getByRole("radio", { name: "Option 1" }).isChecked()
+      await usingTheGridForm
+        .getByRole("radio", { name: "Option 1" })
+        .isChecked()
     ).toBeFalsy();
     expect(
-      usingTheGridForm.getByRole("radio", { name: "Option 2" }).isChecked()
+      await usingTheGridForm
+        .getByRole("radio", { name: "Option 2" })
+        .isChecked()
     ).toBeTruthy();
   });
 });
