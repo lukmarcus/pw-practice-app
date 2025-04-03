@@ -1,38 +1,34 @@
 import { test } from "@playwright/test";
-import { NavigationPage } from "../page-objects/navigationPage";
-import { FormLayoutsPage } from "../page-objects/formLayoutsPage";
-import { DatepickerPage } from "../page-objects/datepickerPage";
+import { PageManager } from "../page-objects/pageManager";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:4200/");
 });
 
 test("Navigate to form page", async ({ page }) => {
-  const navigateTo = new NavigationPage(page);
-  await navigateTo.formLayoutsPage();
-  await navigateTo.datePickerPage();
-  await navigateTo.smartTablePage();
-  await navigateTo.toastPage();
-  await navigateTo.tooltipPage();
+  const pm = new PageManager(page);
+  await pm.navigateTo.formLayoutsPage();
+  await pm.navigateTo.datePickerPage();
+  await pm.navigateTo.smartTablePage();
+  await pm.navigateTo.toastPage();
+  await pm.navigateTo.tooltipPage();
 });
 
 test("Parametrized methods", async ({ page }) => {
-  const navigateTo = new NavigationPage(page);
-  const onFormLayoutsPage = new FormLayoutsPage(page);
-  const onDatepickerPage = new DatepickerPage(page);
+  const pm = new PageManager(page);
 
-  await navigateTo.formLayoutsPage();
-  await onFormLayoutsPage.submitUsingTheGridFormWithCredentialsAndSelectOption(
+  await pm.navigateTo.formLayoutsPage();
+  await pm.onFormsLayoutsPage.submitUsingTheGridFormWithCredentialsAndSelectOption(
     "test@test.com",
     "Welcome1",
     "Option 2"
   );
-  await onFormLayoutsPage.submitInlineFormWithNameEmailAndCheckbox(
+  await pm.onFormsLayoutsPage.submitInlineFormWithNameEmailAndCheckbox(
     "John Smith",
     "john@test.com",
     true
   );
-  await navigateTo.datePickerPage();
-  await onDatepickerPage.selectCommonDatePickerDateFromToday(5);
-  await onDatepickerPage.selectDatepickerWithRangeFromToday(6, 15);
+  await pm.navigateTo.datePickerPage();
+  await pm.onDatePickerPage.selectCommonDatePickerDateFromToday(5);
+  await pm.onDatePickerPage.selectDatepickerWithRangeFromToday(6, 15);
 });
