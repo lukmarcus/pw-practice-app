@@ -1,25 +1,21 @@
-import { Page, Locator } from "@playwright/test";
+import { Page } from "@playwright/test";
+import { HelperBase } from "./helperBase";
 
-export class NavigationPage {
-  readonly page: Page;
-  readonly formLayoutsMenuItem: Locator;
-  readonly datePickerMenuItem: Locator;
-  readonly smartTableMenuItem: Locator;
-  readonly toastMenuItem: Locator;
-  readonly tooltipMenuItem: Locator;
+export class NavigationPage extends HelperBase {
+  formLayoutsMenuItem = this.page.getByText("Form Layouts");
+  datePickerMenuItem = this.page.getByText("Datepicker");
+  smartTableMenuItem = this.page.getByText("Smart Table");
+  toastMenuItem = this.page.getByText("Toastr");
+  tooltipMenuItem = this.page.getByText("Tooltip");
 
   constructor(page: Page) {
-    this.page = page;
-    this.formLayoutsMenuItem = this.page.getByText("Form Layouts");
-    this.datePickerMenuItem = this.page.getByText("Datepicker");
-    this.smartTableMenuItem = this.page.getByText("Smart Table");
-    this.toastMenuItem = this.page.getByText("Toastr");
-    this.tooltipMenuItem = this.page.getByText("Tooltip");
+    super(page);
   }
 
   async formLayoutsPage() {
     await this.selectGroupMenuItem("Forms");
     await this.formLayoutsMenuItem.click();
+    await this.waitForNumberOfSeconds(2);
   }
 
   async datePickerPage() {
