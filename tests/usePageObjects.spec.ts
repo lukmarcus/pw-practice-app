@@ -28,11 +28,19 @@ test("Parametrized methods", async ({ page }) => {
     "Welcome1",
     "Option 2"
   );
+  await page.screenshot({ path: "screenshots/formsLayoutPage.png" });
+  const buffer = await page.screenshot();
+  console.log(buffer.toString("base64"));
   await pm.onFormsLayoutsPage.submitInlineFormWithNameEmailAndCheckbox(
     randomFullName,
     randomEmail,
     true
   );
+  await page
+    .locator("nb-card", {
+      hasText: "Inline form",
+    })
+    .screenshot({ path: "screenshots/inlineForm.png" });
   await pm.navigateTo.datePickerPage();
   await pm.onDatePickerPage.selectCommonDatePickerDateFromToday(5);
   await pm.onDatePickerPage.selectDatepickerWithRangeFromToday(6, 15);
