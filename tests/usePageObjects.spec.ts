@@ -24,8 +24,8 @@ test("Parametrized methods", async ({ page }) => {
 
   await pm.navigateTo.formLayoutsPage();
   await pm.onFormsLayoutsPage.submitUsingTheGridFormWithCredentialsAndSelectOption(
-    "test@test.com",
-    "Welcome1",
+    process.env.USERNAME,
+    process.env.PASSWORD,
     "Option 2"
   );
   await page.screenshot({ path: "screenshots/formsLayoutPage.png" });
