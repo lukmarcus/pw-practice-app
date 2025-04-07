@@ -1,5 +1,6 @@
 import { test } from "@playwright/test";
 import { PageManager } from "../page-objects/pageManager";
+import { faker } from "@faker-js/faker";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("http://localhost:4200/");
@@ -16,6 +17,10 @@ test("Navigate to form page", async ({ page }) => {
 
 test("Parametrized methods", async ({ page }) => {
   const pm = new PageManager(page);
+  const randomFullName = faker.person.fullName();
+  const randomEmail = `${randomFullName.replace(" ", "")}${faker.number.int(
+    1000
+  )}@test.com`;
 
   await pm.navigateTo.formLayoutsPage();
   await pm.onFormsLayoutsPage.submitUsingTheGridFormWithCredentialsAndSelectOption(
@@ -24,8 +29,8 @@ test("Parametrized methods", async ({ page }) => {
     "Option 2"
   );
   await pm.onFormsLayoutsPage.submitInlineFormWithNameEmailAndCheckbox(
-    "John Smith",
-    "john@test.com",
+    randomFullName,
+    randomEmail,
     true
   );
   await pm.navigateTo.datePickerPage();
