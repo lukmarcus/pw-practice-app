@@ -8,6 +8,7 @@ import type { TestOptions } from "./test-options";
 // import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
+require("dotenv").config();
 
 /**
  * See https://playwright.dev/docs/test-configuration.
