@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-test.describe("Form Layouts page", () => {
+test.describe("Form Layouts page @block", () => {
   test.describe.configure({ retries: 2 });
   test.beforeEach(async ({ page }) => {
     await page.getByText("Forms").click();

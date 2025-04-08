@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-test("Navigate to form page", async ({ page }) => {
+test("Navigate to form page @smoke @regression", async ({ page }) => {
   const pm = new PageManager(page);
   await pm.navigateTo.formLayoutsPage();
   await pm.navigateTo.datePickerPage();
@@ -15,7 +15,7 @@ test("Navigate to form page", async ({ page }) => {
   await pm.navigateTo.tooltipPage();
 });
 
-test("Parametrized methods", async ({ page }) => {
+test("Parametrized methods @smoke", async ({ page }) => {
   const pm = new PageManager(page);
   const randomFullName = faker.person.fullName();
   const randomEmail = `${randomFullName.replace(" ", "")}${faker.number.int(
