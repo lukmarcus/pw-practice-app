@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Form Layouts page @block", () => {
-  test.describe.configure({ retries: 2 });
+  test.describe.configure({ retries: 0 });
   test.beforeEach(async ({ page }) => {
     await page.getByText("Forms").click();
     await page.getByText("Form Layouts").click();
@@ -44,6 +44,7 @@ test.describe("Form Layouts page @block", () => {
     const radioStatus = await usingTheGridForm
       .getByRole("radio", { name: "Option 1" })
       .isChecked();
+    await expect(usingTheGridForm).toHaveScreenshot({ maxDiffPixels: 100 });
     expect(radioStatus).toBeTruthy();
     await expect(
       usingTheGridForm.getByRole("radio", { name: "Option 1" })
