@@ -50,4 +50,10 @@ export default defineConfig<TestOptions>({
       use: { ...devices["iPhone 13 Pro"] },
     },
   ],
+
+  webServer: {
+    command: "npm run start",
+    url: "http://localhost:4200/",
+    timeout: 120 * 1000,
+  },
 });
