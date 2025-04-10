@@ -56,11 +56,6 @@ test("Locating parent elements", async ({ page }) => {
     .filter({ hasText: "Sign in" })
     .getByRole("textbox", { name: "Email" })
     .click();
-  // await page
-  //   .locator(':text-is("Using the grid")')
-  //   .locator("..")
-  //   .getByRole("textbox", { name: "Email" })
-  //   .click();
 });
 
 test("Reusing the locators", async ({ page }) => {
